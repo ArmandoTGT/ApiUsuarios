@@ -1,5 +1,15 @@
-import os
 import sys
+from sys import platform as _platform
+
+if _platform == "linux" or _platform == "linux2":
+    origin_path = "/.."
+elif _platform == "win32" or "win64":
+    origin_path = ".."
+
+if origin_path not in sys.path:
+    sys.path.append(origin_path)
+
+import os
 
 from business.control.Exceptions.WrongLoginException import WrongLoginException
 from business.control.Exceptions.EmailAlreadyInUseException import EmailAlreadyInUseException
@@ -7,15 +17,13 @@ import shelve
 
 from business.model.User import User
 
-
 class DBControl:
     def __init__(self):
          filename = os.path.dirname(os.path.abspath(__file__)) + "/Users.db"
          self.__db = shelve.open(filename, flag='c')
 
-    def CheckUser(self, email, senha):
-
-        if (email in list(self.__db.keys())) and (self.__db[email].getSenha() == senha):
+    def checkUser(self, user_name, senha):
+        if (user_name in list(self.__db.keys())) and (self.__db[user_name].getSenha() == senha):
             return True
         else:
             raise WrongLoginException
