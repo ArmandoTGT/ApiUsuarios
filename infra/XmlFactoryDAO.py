@@ -1,0 +1,2 @@
+class XmlFactoryDAO:
+    pass

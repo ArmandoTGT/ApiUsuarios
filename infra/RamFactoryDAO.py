@@ -1,0 +1,2 @@
+class RamFactoryDAO:
+    pass

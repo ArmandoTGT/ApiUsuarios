@@ -1,13 +1,13 @@
 import sys
-from sys import platform as _platform
 
-if _platform == "linux" or _platform == "linux2":
-	origin_path = "/.."
-elif _platform == "win32" or "win64":
-	origin_path = ".."
+linux_origin_path = "/.."
+windows_origin_path = ".."
 
-if origin_path not in sys.path:
-    sys.path.append(origin_path)
+if (sys.platform == "linux" or sys.platform == "linux2") and linux_origin_path not in sys.path:
+	sys.path.append(linux_origin_path)
+
+if (sys.platform == "win32" or sys.platform == "win64") and windows_origin_path not in sys.path:
+	sys.path.append(windows_origin_path)
 
 from business.control.Validation.Validation import Validation
 from business.control.Exceptions.MinLengthException import MinLengthException
