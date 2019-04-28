@@ -1,5 +1,6 @@
 import sys
 
+
 linux_origin_path = "/.."
 windows_origin_path = ".."
 
@@ -14,8 +15,9 @@ from business.control.Exceptions.MinLengthException import MinLengthException
 from business.control.Exceptions.MaxLengthException import MaxLengthException
 from business.control.Exceptions.FormatException import FormatException
 
+
 class LoginValidation(Validation):
-	def validate(input_text):
+	def validate(self, input_text):
 		input_text_size = len(input_text)
 		input_correct_format = not any(character.isdigit() for character in input_text)
 		input_correct_length_min = 0 < input_text_size 
@@ -28,4 +30,4 @@ class LoginValidation(Validation):
 			raise MaxLengthException(15, input_text_size)
 
 		if(not input_correct_format):
-			raise FormatException("Nome de usuário possuí algum caractere inválido.")
+			raise FormatException("sem caracteres inválidos.")

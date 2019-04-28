@@ -1,5 +1,4 @@
 import sys
-from abc import ABC, abstractmethod
 
 linux_origin_path = "/.."
 windows_origin_path = ".."
@@ -10,17 +9,13 @@ if (sys.platform == "linux" or sys.platform == "linux2") and linux_origin_path n
 if (sys.platform == "win32" or sys.platform == "win64") and windows_origin_path not in sys.path:
     sys.path.append(windows_origin_path)
 
-from infra.RamFactoryDAO import RamFactoryDAO
-from infra.XmlFactoryDAO import XmlFactoryDAO
+from infra.DAOFactory import DAOFactory
+from infra.RamProfissionalDAO import RamProfissionalDAO as RamProfissionalDAO
+from infra.RamServicoDAO import RamServicoDAO as RamServicoDAO
 
-class FactoryDAO(ABC):
-    @abstractmethod
-    def get_userDAO(self):
-        pass
+class RamFactoryDAO(DAOFactory):
+    def getProfissionalDAO(self):
+        return RamProfissionalDAO
 
-    def get_FactoryDAO(self, factory_id):
-        if factory_id == 'RAM Factory':
-            return RamFactoryDAO
-
-
-
+    def getServicoDAO(self):
+        return RamServicoDAO
