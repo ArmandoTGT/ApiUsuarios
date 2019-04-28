@@ -15,17 +15,17 @@ from business.model.Profissional import Profissional
 
 class ProfissionalDAO(ABC):
     @abstractmethod
-    def insert_profissional(self, profissional: Profissional):
+    def insere_profissional(self, profissional: Profissional):
         pass
 
     @abstractmethod
-    def delete_profissional(self, email: str):
+    def atualiza_profissional(self, profissional: Profissional):
         pass
 
     @abstractmethod
-    def update_profissional(self, profissional: Profissional):
+    def remove_profissional(self, id):
         pass
 
     @abstractmethod
-    def find_profissional(self, email: str):
+    def busca_profissional(self, id):
         pass

@@ -1,6 +1,7 @@
 class Orcamento:
     # CONSTRUTOR:
-    def __init__(self, nome: str, profissional, orcamento):
+    def __init__(self, id, nome: str, profissional, orcamento):
+        self.id = id
         self.nome = nome
         self.profissional = profissional
         self.orcamento = orcamento
@@ -10,9 +11,12 @@ class Orcamento:
     # caso os dois objetos possuam os mesmos atributos
     # que sejam únicos no sistema:
     def __eq__(self, other):
-        return self.nome == other.nome and self.profissional == other.profissional and self.orcamento == other.orcamento
+        return self.id == other.id
 
     # MÈTODOS GET:
+    def get_id(self):
+        return self.id
+
     def get_nome(self):
         return self.nome
 

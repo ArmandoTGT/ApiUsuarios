@@ -10,14 +10,17 @@ if (sys.platform == "linux" or sys.platform == "linux2") and linux_origin_path n
 if (sys.platform == "win32" or sys.platform == "win64") and windows_origin_path not in sys.path:
     sys.path.append(windows_origin_path)
 
+from business.control.Exceptions.NotFoundException import NotFoundException
 from business.model.Servico import Servico
+from infra.ServicoDAO import ServicoDAO
 
 
-class ServicoDAO(ABC):
-    @abstractmethod
+class XmlServicoDAO(ServicoDAO):
+    def __init__(self):
+        pass
+
     def atualiza_servico(self, servico: Servico):
         pass
 
-    @abstractmethod
     def busca_servico(self, id):
         pass

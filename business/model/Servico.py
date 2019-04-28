@@ -1,6 +1,7 @@
 class Servico:
     # CONSTRUTOR:
-    def __init__(self, nome: str, descricoes: str, cliente_nome: str, cliente_email: str):
+    def __init__(self, id, nome: str, descricoes: str, cliente_nome: str, cliente_email: str):
+        self.id = id
         self.nome = nome
         self.descricoes = descricoes
         self.cliente_nome = cliente_nome
@@ -12,9 +13,12 @@ class Servico:
     # caso os dois objetos possuam os mesmos atributos
     # que sejam únicos no sistema:
     def __eq__(self, other):
-        return self.nome == other.nome and self.cliente_email == other.cliente_email
+        return self.id == other.id
 
     # MÈTODOS GET:
+    def get_id(self):
+        return self.id
+
     def get_nome(self):
         return self.nome
 

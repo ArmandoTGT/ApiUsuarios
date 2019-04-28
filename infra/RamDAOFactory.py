@@ -13,7 +13,7 @@ from infra.DAOFactory import DAOFactory
 from infra.RamProfissionalDAO import RamProfissionalDAO as RamProfissionalDAO
 from infra.RamServicoDAO import RamServicoDAO as RamServicoDAO
 
-class RamFactoryDAO(DAOFactory):
+class RamDAOFactory(DAOFactory):
     def getProfissionalDAO(self):
         return RamProfissionalDAO
 

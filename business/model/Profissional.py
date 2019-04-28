@@ -1,5 +1,6 @@
 class Profissional:
-    def __init__(self,  nome, senha, email, data_nascimento, cpf, rg, cnh, telefone, endereco):
+    def __init__(self, id, nome, senha, email, data_nascimento, cpf, rg, cnh, telefone, endereco):
+        self.id = id
         self.nome = nome
         self.senha = senha
         self.email = email
@@ -20,7 +21,10 @@ class Profissional:
         #       apenas poderá mudar um de cada vez pois isso
         #       garante que ao menos o email ou o CPF sejam
         #       iguais durante a comparação
-        return self.email == other.email or self.cpf == other.cpf
+        return self.id == other.id
+
+    def get_id(self):
+        return self.id
 
     def get_email(self):
         return self.email

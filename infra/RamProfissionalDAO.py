@@ -16,18 +16,39 @@ from business.control.Exceptions.NotFoundException import NotFoundException
 
 class RamProfissionalDAO(ProfissionalDAO):
     def __init__(self):
-        self.profissional_list = None
+        self.profissional_list = []
 
-    def insert_profissional(self, profissional: Profissional):
+    def insere_profissional(self, profissional: Profissional):
         self.profissional_list.append(profissional)
 
-    def delete_profissional(self, email: str):
+    def atualiza_profissional(self, profissional: Profissional):
+        index = 0
+
+        # Procura em cada elemento da lista:
+        for profissional_list_element in self.profissional_list:
+            # Caso encontre o Profisssional igual na lista:
+            if profissional_list_element == profissional:
+                # Remove a versão antiga
+                self.profissional_list.pop(index)
+                # e adiciona a nova instância do objeto?
+                self.profissional_list.insert(index, profissional)
+
+                return None
+
+            # Incrementa o índice:
+            index += 1
+
+        # Caso passe pelo for retorna uma exceção
+        # indicando que a operação Falhou
+        raise NotFoundException("profissional")
+
+    def remove_profissional(self, id):
         index = 0
 
         # Procura em cada elemento da lista:
         for profissional in self.profissional_list:
             # Caso encontre o Profisssional com o email fornecido
-            if profissional.get_email() == email:
+            if profissional.get_id() == id:
                 # Deleta ele e retorna seu valor:
                 return self.profissional_list.pop(index)
             # Incrementa o índice:
@@ -37,30 +58,13 @@ class RamProfissionalDAO(ProfissionalDAO):
         # indicando que a operação Falhou
         raise NotFoundException("profissional")
 
-    def update_profissional(self, profissional: Profissional):
-        index = 0
-
-        # Procura em cada elemento da lista:
-        for profissional_list_element in self.profissional_list:
-            # Caso encontre o Profisssional igual na lista?
-            if profissional_list_element == profissional:
-                # Remove a versão antiga e adiciona a nova?
-                self.profissional_list.pop(index)
-                self.profissional_list.insert(index, profissional)
-            # Incrementa o índice:
-            index += 1
-
-        # Caso passe pelo for retorna uma exceção
-        # indicando que a operação Falhou
-        raise NotFoundException("profissional")
-
-    def find_profissional(self, email: str):
+    def busca_profissional(self, id):
         index = 0
 
         # Procura em cada elemento da lista:
         for profissional in self.profissional_list:
             # Caso encontre o Profisssional com o email fornecido
-            if profissional.get_email() == email:
+            if profissional.get_id() == id:
                 # Retorna o objeto encontrado:
                 return profissional
             # Incrementa o índice:

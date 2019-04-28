@@ -14,18 +14,19 @@ from business.model.Profissional import Profissional
 from business.control.Exceptions.NotFoundException import NotFoundException
 
 
-class RamProfissionalDAO(ProfissionalDAO):
+class XmlProfissionalDAO(ProfissionalDAO):
     def __init__(self):
         pass
 
-    def insert_profissional(self, profissional: Profissional):
+    def insere_profissional(self, profissional: Profissional):
         pass
 
-    def delete_profissional(self, email: str):
+
+    def atualiza_profissional(self, profissional: Profissional):
         pass
 
-    def update_profissional(self, profissional: Profissional):
+    def remove_profissional(self, id):
         pass
 
-    def find_profissional(self, email: str):
+    def busca_profissional(self, id):
         pass
