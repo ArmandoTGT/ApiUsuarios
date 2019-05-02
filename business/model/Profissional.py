@@ -25,7 +25,45 @@ class Profissional:
 
     def get_id(self):
         return self.id
+   
+    def get_nome(self):
+        return self.nome
+
+    def get_senha(self):
+        return self.senha
 
     def get_email(self):
         return self.email
 
+    def get_data_nascimento(self):
+        return self.data_nascimento
+
+    def get_cpf(self):
+        return self.cpf
+
+    def get_rg(self):
+        return self.rg
+    
+    def get_cnh(self):
+        return self.cnh
+
+    def get_telefone(self):
+        return self.telefone
+    
+    def get_endereco(self):
+        return self.endereco
+    
+    def set_nome(self, nome):
+        self.nome = nome
+
+    def set_senha(self, senha):
+        self.senha = senha
+
+    def set_email(self, email):
+        self.email = email 
+
+    def set_telefone(self, telefone):
+        self.telefone = telefone
+
+    def set_endereco(self, endereco):
+        self.endereco = endereco

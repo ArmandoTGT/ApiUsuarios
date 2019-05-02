@@ -13,14 +13,20 @@ if (sys.platform == "win32" or sys.platform == "win64") and windows_origin_path 
 from business.control.Exceptions.NotFoundException import NotFoundException
 from business.model.Servico import Servico
 from infra.ServicoDAO import ServicoDAO
+import os
+import xml.etree.ElementTree
+from django.core import serializers
+
 
 
 class XmlServicoDAO(ServicoDAO):
     def __init__(self):
-        pass
+        filename = os.path.dirname(os.path.abspath(__file__)) + "/Services.xml"
+        self.__db = serializers.deserialize('xml',xml.etree.ElementTree.parse(filename))        
 
     def atualiza_servico(self, servico: Servico):
-        pass
+        self.__db[servico.get_id()] = servico
+        return True
 
     def busca_servico(self, id):
-        pass
+        return self.__db[id]

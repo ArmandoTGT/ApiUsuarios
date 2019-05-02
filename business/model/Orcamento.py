@@ -1,10 +1,11 @@
 class Orcamento:
     # CONSTRUTOR:
-    def __init__(self, id, nome: str, profissional, orcamento):
+    def __init__(self, id, nome: str, profissional, orcamento, idServico):
         self.id = id
         self.nome = nome
         self.profissional = profissional
         self.orcamento = orcamento
+        self.idServico = idServico
 
     # Override do equals para fazer com que a comparação ==
     # entre dois objetos do tipo Profissional retorne True
@@ -26,12 +27,13 @@ class Orcamento:
     def get_orcamento(self):
         return self.orcamento
 
+    def get_idServico(self):
+        return self.id
+
     # MÈTODOS SET:
     def set_nome(self, nome):
         self.nome = nome
 
-    def set_profissional(self, profissional):
-        self.profissional = profissional
-
     def set_orcamento(self, orcamento):
         self.orcamento = orcamento
+ 

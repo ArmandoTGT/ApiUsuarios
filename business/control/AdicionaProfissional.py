@@ -12,18 +12,19 @@ if origin_path not in sys.path:
 from business.control.Validation.LoginValidation import LoginValidation
 from business.control.Validation.PasswordValidation import PasswordValidation
 from infra.infra import DBControl
-from business.model.User import User
+from business.model.Profissional import Profissional
+from infra.RamProfissionalDAO import RamProfissionalDAO
 
 
-def addUser(nome, senha, email):
+def AdicionaProfissional(id, nome, senha, email, data_nascimento, cpf, rg, cnh, telefone, endereco):
     email = LoginValidation().validate(email)
     
     senha = PasswordValidation().validate(senha)
 
-    dbControl = DBControl()
+    DAO = RamProfissionalDAO()
     
-    if dbControl.validaEmail(email):
-        cliente = User(nome, senha, email)
-        dbControl.persisteUser(cliente)
+    #if DAO.validaEmail(email):
+    profissional = Profissional(id, nome, senha, email, data_nascimento, cpf, rg, cnh, telefone, endereco)
+    DAO.insere_profissional(profissional)
         
-    dbControl.closeDB()
+    #dbControl.closeDB()
