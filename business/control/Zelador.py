@@ -10,6 +10,7 @@ if (sys.platform == "win32" or sys.platform == "win64") and windows_origin_path 
     sys.path.append(windows_origin_path)
 
 from business.control.Fonte import Fonte
+from business.control.Memento import Memento
 
 
 class Zelador:
@@ -17,8 +18,9 @@ class Zelador:
         self._mementos = []
         self._fonte = fonte
 
-    def save_state(self) -> None:
+    def save_state(self, state: object) -> None:
         self._mementos.append(self._fonte.create_state_memento())
+        self._fonte.restore_state(Memento(state))
 
     def undo_state(self) -> None:
         if not self._mementos:
