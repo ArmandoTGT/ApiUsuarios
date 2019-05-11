@@ -1,12 +1,11 @@
 class Email:
-
-    def envioEmail(email, texto):
+    def envioEmail(self, email, texto):
         #9 digitos zeros para RG
         #11 digitos zeros para CPF
-        if (email = "gmail"):
+        if (email == "gmail"):
             return True
         else:
             return False
-
-    def recebimentoEmail():
+            
+    def recebimentoEmail(self):
         return "Email confirmado"

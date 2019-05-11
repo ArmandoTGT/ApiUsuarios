@@ -1,6 +1,6 @@
 class ReceitaFederal:
         
-    def validaCPF(cpf, dataNascimento):
+    def validaCPF(self, cpf, dataNascimento):
         #11 digitos - CPF
         #9  digitos - Data
         if (dataNascimento == "00000000" and cpf == "00000000000"):

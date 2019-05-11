@@ -1,12 +1,24 @@
 import sys
-
 from sys import platform as _platform
-from infra.communication.adapter import Adaptador
-from Mocks.mockMinisterioJustica import MinisterioJustica
 
+if _platform == "linux" or _platform == "linux2":
+	# linux
+	origin_path = "../.."
+elif _platform == "win32" or "win64":
+	# Windows
+	origin_path = "../.."
+#elif _platform == "darwin":
+	# MAC OS X
+
+if origin_path not in sys.path:
+    sys.path.append(origin_path)
+
+from infra.APICommunication.Adapter import Adaptador
+from mocks.mockMinisterioJustica import MinisterioJustica
+#asd
 class AdapterReceitaFederal(Adaptador):
     def __init__(self):
-        self.__miniesterioJustica = MinisterioJustica()
+        self.__ministerioJustica = MinisterioJustica()
 
     def operacao(self, rg, cpf):
         self.__ministerioJustica.AntecedenteCriminal(rg, cpf)
