@@ -32,3 +32,6 @@ class Zelador:
             self._fonte.restore_state(previous_memento)
         except Exception:
             self.undo_state()
+
+    def get_fonte(self) -> Fonte:
+        return self._fonte

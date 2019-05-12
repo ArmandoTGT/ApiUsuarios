@@ -10,12 +10,12 @@ if (sys.platform == "win32" or sys.platform == "win64") and windows_origin_path 
     sys.path.append(windows_origin_path)
 
 from infra.DAOFactory import DAOFactory
-from infra.XmlProfissionalDAO import XmlProfissionalDAO as XmlProfissionalDAO
-from infra.XmlServicoDAO import XmlServicoDAO as XmlServicoDAO
+from infra.XmlProfissionalDAO import XmlProfissionalDAO
+from infra.XmlServicoDAO import XmlServicoDAO
 
 class XmlDAOFactory(DAOFactory):
-    def getProfissionalDAO(self):
-        return XmlProfissionalDAO
+    def getProfissionalDAO(self) -> XmlProfissionalDAO:
+        return XmlProfissionalDAO()
 
-    def getServicoDAO(self):
-        return XmlServicoDAO
+    def getServicoDAO(self) -> XmlServicoDAO:
+        return XmlServicoDAO()

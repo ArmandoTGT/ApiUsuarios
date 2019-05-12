@@ -10,12 +10,16 @@ if (sys.platform == "win32" or sys.platform == "win64") and windows_origin_path 
     sys.path.append(windows_origin_path)
 
 from infra.DAOFactory import DAOFactory
-from infra.RamProfissionalDAO import RamProfissionalDAO as RamProfissionalDAO
-from infra.RamServicoDAO import RamServicoDAO as RamServicoDAO
+from infra.RamProfissionalDAO import RamProfissionalDAO
+from infra.RamServicoDAO import RamServicoDAO
+from infra.RamOrcamentoDAO import RamOrcamentoDAO
 
 class RamDAOFactory(DAOFactory):
-    def getProfissionalDAO(self):
-        return RamProfissionalDAO
+    def getProfissionalDAO(self) -> RamProfissionalDAO:
+        return RamProfissionalDAO()
 
-    def getServicoDAO(self):
-        return RamServicoDAO
+    def getServicoDAO(self) -> RamServicoDAO:
+        return RamServicoDAO()
+
+    def getOrcamentoDAO(self) -> RamOrcamentoDAO:
+        return RamOrcamentoDAO()

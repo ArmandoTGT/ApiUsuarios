@@ -1,5 +1,5 @@
+from abc import ABC, abstractmethod
 import sys
-import uuid
 
 linux_origin_path = "/.."
 windows_origin_path = ".."
@@ -11,15 +11,21 @@ if (sys.platform == "win32" or sys.platform == "win64") and windows_origin_path 
     sys.path.append(windows_origin_path)
 
 from business.model.Orcamento import Orcamento
-from infra.RamOrcamentoDAO import RamOrcamentoDAO
 
 
-def AdicionaOrcamento(nome, profissional, orcamento, id_servico):
-    DAO = RamOrcamentoDAO()
+class OrcamentoDAO(ABC):
+    @abstractmethod
+    def insere_orcamento(self, orcamento: Orcamento):
+        pass
 
-    generate_id = str(uuid.uuid4()).split('-')
-    id = str(id_servico) + generate_id[0] + generate_id[1]
-   
-    orcamento = Orcamento(id, nome, profissional, orcamento, id_servico)
+    @abstractmethod
+    def atualiza_orcamento(self, orcamento: Orcamento):
+        pass
 
-    DAO.insere_orcamento(orcamento)
+    @abstractmethod
+    def remove_orcamento(self, id):
+        pass
+
+    @abstractmethod
+    def busca_orcamento(self, id):
+        pass
