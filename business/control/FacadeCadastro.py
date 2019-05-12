@@ -12,6 +12,7 @@ if (sys.platform == "win32" or sys.platform == "win64") and windows_origin_path 
     sys.path.append(windows_origin_path)
 
 from business.control.AdicionaProfissional import AdicionaProfissional
+from business.control.AdicionaOrcamento import AdicionaOrcamento
 
 #Funções chamadas em Login
 from business.control.Validation.LoginValidation import LoginValidation
@@ -25,12 +26,12 @@ from business.relatorio import relatorio
 
 class FacadeCadastro:
     @staticmethod
-    def add_profissional(nome, senha, email, data_nascimento, cpf, rg, cnh, telefone, endereco):
+    def add_profissional(nome, senha, email, data_nascimento, cpf, rg, cnh, telefone, endereco) -> None:
         global frequencia_de_acesso
 
         frequencia_de_acesso += 1
 
-        FacadeCadastro._relatorio_acesso()
+        FacadeCadastro.__relatorio_acesso()
 
         try:
             AdicionaProfissional(nome, senha, email, data_nascimento, cpf, rg, cnh, telefone, endereco)
@@ -38,42 +39,43 @@ class FacadeCadastro:
             print(E)
 
     @staticmethod
-    def add_orcamento(nome, profissional, orcamento, id_servico):
+    def add_orcamento(nome: str, profissional: Profissional, orcamento: Orcamento, id_servico: str) -> None:
         global frequencia_de_acesso
 
         frequencia_de_acesso += 1
 
-        FacadeCadastro._relatorio_acesso()
+        FacadeCadastro.__relatorio_acesso()
 
         try:
-            AdicionaProfissional(nome, profissional, orcamento, id_servico)
+            AdicionaOrcamento(nome, profissional, orcamento, id_servico)
         except Exception as E:
             print(E)
 
     @staticmethod
-    def valida_login(email):
+    def valida_login(email: str) -> str:
         global frequencia_de_acesso
 
         frequencia_de_acesso += 1
 
-        FacadeCadastro.relatorio_acesso()
+        FacadeCadastro.__relatorio_acesso()
 
         try:
-            email = ValidaFormatoLogin().valida(email.lower())
+            email = LoginValidation().validate(email.lower())
         except Exception as error:
             print('\n', error)
 
         return email
 
     @staticmethod
-    def valida_senha(senha):
-        global frequenciaDeAcesso
-        frequenciaDeAcesso += 1
-        # print('Frequencia de Acesso:', frequenciaDeAcesso)
-        facade.relatorio_acesso()
+    def valida_senha(senha: str) -> str:
+        global frequencia_de_acesso
+
+        frequencia_de_acesso += 1
+
+        FacadeCadastro.__relatorio_acesso()
 
         try:
-            senha = ValidaFormatoSenha().valida(senha)
+            senha = PasswordValidation().validate(senha)
         except Exception as error:
             print('\n', error)
 
@@ -110,7 +112,7 @@ class FacadeCadastro:
             print('\n', error)
 
     @staticmethod
-    def _relatorio_acesso():
+    def __relatorio_acesso():
         global horaPassada, tempoPassado
 
         horaAtual = datetime.now()

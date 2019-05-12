@@ -15,18 +15,18 @@ from business.control.Fonte import Fonte
 
 class Profissional:
     def __init__(self, id, nome, senha, email, data_nascimento, cpf, rg, cnh, telefone, endereco):
-        self.id = id
-        self.nome = nome
-        self.senha = senha
-        self.email = email
-        self.data_nascimento = data_nascimento
-        self.cpf = cpf
-        self.rg = rg
-        self.cnh = cnh
-        self.telefone = telefone
-        self.endereco = endereco
-        self._fonte = Fonte(Profissional(id, nome, senha, email, data_nascimento, cpf, rg, cnh, telefone, endereco))
-        self._zelador = Zelador(self._fonte)
+        self.__id = id
+        self.__nome = nome
+        self.__senha = senha
+        self.__email = email
+        self.__data_nascimento = data_nascimento
+        self.__cpf = cpf
+        self.__rg = rg
+        self.__cnh = cnh
+        self.__telefone = telefone
+        self.__endereco = endereco
+        self.__fonte = Fonte(Profissional(id, nome, senha, email, data_nascimento, cpf, rg, cnh, telefone, endereco))
+        self.__zelador = Zelador(self.__fonte)
 
     # Override do equals para fazer com que a comparação ==
     # entre dois objetos do tipo Profissional retorne True
@@ -38,75 +38,75 @@ class Profissional:
         #       apenas poderá mudar um de cada vez pois isso
         #       garante que ao menos o email ou o CPF sejam
         #       iguais durante a comparação
-        return self.id == other.id
+        return self.__id == other.id
 
     def get_id(self):
-        return self.id
+        return self.__id
    
     def get_nome(self):
-        return self.nome
+        return self.__nome
 
     def get_senha(self):
-        return self.senha
+        return self.__senha
 
     def get_email(self):
-        return self.email
+        return self.__email
 
     def get_data_nascimento(self):
-        return self.data_nascimento
+        return self.__data_nascimento
 
     def get_cpf(self):
-        return self.cpf
+        return self.__cpf
 
     def get_rg(self):
-        return self.rg
+        return self.__rg
     
     def get_cnh(self):
-        return self.cnh
+        return self.__cnh
 
     def get_telefone(self):
-        return self.telefone
+        return self.__telefone
     
     def get_endereco(self):
-        return self.endereco
+        return self.__endereco
     
     def set_nome(self, nome):
-        self._zelador.save_state(Profissional(self.id, self.nome, self.senha, self.email, self.data_nascimento,
-                                              self.cpf, self.rg, self.cnh, self.telefone, self.endereco))
-        self.nome = nome
+        self.__zelador.save_state(Profissional(self.__id, self.__nome, self.__senha, self.__email, self.__data_nascimento,
+                                               self.__cpf, self.__rg, self.__cnh, self.__telefone, self.__endereco))
+        self.__nome = nome
 
     def set_senha(self, senha):
-        self._zelador.save_state(Profissional(self.id, self.nome, self.senha, self.email, self.data_nascimento,
-                                              self.cpf, self.rg, self.cnh, self.telefone, self.endereco))
-        self.senha = senha
+        self.__zelador.save_state(Profissional(self.__id, self.__nome, self.__senha, self.__email, self.__data_nascimento,
+                                               self.__cpf, self.__rg, self.__cnh, self.__telefone, self.__endereco))
+        self.__senha = senha
 
     def set_email(self, email):
-        self._zelador.save_state(Profissional(self.id, self.nome, self.senha, self.email, self.data_nascimento,
-                                              self.cpf, self.rg, self.cnh, self.telefone, self.endereco))
-        self.email = email 
+        self.__zelador.save_state(Profissional(self.__id, self.__nome, self.__senha, self.__email, self.__data_nascimento,
+                                               self.__cpf, self.__rg, self.__cnh, self.__telefone, self.__endereco))
+        self.__email = email
 
     def set_telefone(self, telefone):
-        self._zelador.save_state(Profissional(self.id, self.nome, self.senha, self.email, self.data_nascimento,
-                                              self.cpf, self.rg, self.cnh, self.telefone, self.endereco))
-        self.telefone = telefone
+        self.__zelador.save_state(Profissional(self.__id, self.__nome, self.__senha, self.__email, self.__data_nascimento,
+                                               self.__cpf, self.__rg, self.__cnh, self.__telefone, self.__endereco))
+        self.__telefone = telefone
 
     def set_endereco(self, endereco):
-        self._zelador.save_state(Profissional(self.id, self.nome, self.senha, self.email, self.data_nascimento,
-                                              self.cpf, self.rg, self.cnh, self.telefone, self.endereco))
-        self.endereco = endereco
+        self.__zelador.save_state(Profissional(self.__id, self.__nome, self.__senha, self.__email, self.__data_nascimento,
+                                               self.__cpf, self.__rg, self.__cnh, self.__telefone, self.__endereco))
+        self.__endereco = endereco
 
     def previous_state(self):
-        self._zelador.undo_state()
-        self._fonte = self._zelador.get_fonte()
-        state = self._fonte.get_state()
+        self.__zelador.undo_state()
+        self.__fonte = self.__zelador.get_fonte()
+        state = self.__fonte.get_state()
 
-        self.id = state.get_id()
-        self.nome = state.get_nome()
-        self.senha = state.get_senha()
-        self.email = state.get_email()
-        self.data_nascimento = state.get_data_nascimento()
-        self.cpf = state.get_cpf()
-        self.rg = state.get_rg()
-        self.cnh = state.get_cnh()
-        self.telefone = state.get_telefone()
-        self.endereco = state.get_endereco()
+        self.__id = state.get_id()
+        self.__nome = state.get_nome()
+        self.__senha = state.get_senha()
+        self.__email = state.get_email()
+        self.__data_nascimento = state.get_data_nascimento()
+        self.__cpf = state.get_cpf()
+        self.__rg = state.get_rg()
+        self.__cnh = state.get_cnh()
+        self.__telefone = state.get_telefone()
+        self.__endereco = state.get_endereco()
