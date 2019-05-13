@@ -42,13 +42,13 @@ class RamProfissionalDAO(ProfissionalDAO):
         # indicando que a operação Falhou
         raise NotFoundException("profissional")
 
-    def remove_profissional(self, id):
+    def remove_profissional(self, profissional_id: str):
         index = 0
 
         # Procura em cada elemento da lista:
         for profissional in self.profissional_list:
             # Caso encontre o Profisssional com o email fornecido
-            if profissional.get_id() == id:
+            if profissional.get_id() == profissional_id:
                 # Deleta ele e retorna seu valor:
                 return self.profissional_list.pop(index)
             # Incrementa o índice:
@@ -58,13 +58,29 @@ class RamProfissionalDAO(ProfissionalDAO):
         # indicando que a operação Falhou
         raise NotFoundException("profissional")
 
-    def busca_profissional(self, id):
+    def busca_profissional_id(self, profissional_id: str) -> Profissional:
         index = 0
 
         # Procura em cada elemento da lista:
         for profissional in self.profissional_list:
             # Caso encontre o Profisssional com o email fornecido
-            if profissional.get_id() == id:
+            if profissional.get_id() == profissional_id:
+                # Retorna o objeto encontrado:
+                return profissional
+            # Incrementa o índice:
+            index += 1
+
+        # Caso passe pelo for retorna uma exceção
+        # indicando que a operação Falhou
+        raise NotFoundException("profissional")
+
+    def busca_profissional_email(self, email: str) -> Profissional:
+        index = 0
+
+        # Procura em cada elemento da lista:
+        for profissional in self.profissional_list:
+            # Caso encontre o Profisssional com o email fornecido
+            if profissional.get_email() == email:
                 # Retorna o objeto encontrado:
                 return profissional
             # Incrementa o índice:

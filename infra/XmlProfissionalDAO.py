@@ -31,9 +31,9 @@ class XmlProfissionalDAO(ProfissionalDAO):
         self.__db[profissional.get_id()] = profissional
         return True
 
-    def remove_profissional(self, id):
-        del self.__db[id]
+    def remove_profissional(self, profissional_id):
+        del self.__db[profissional_id]
         return True
 
-    def busca_profissional(self, id):
-        return self.__db[id]
+    def busca_profissional(self, profissional_id):
+        return self.__db[profissional_id]

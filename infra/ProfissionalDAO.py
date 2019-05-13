@@ -23,9 +23,13 @@ class ProfissionalDAO(ABC):
         pass
 
     @abstractmethod
-    def remove_profissional(self, id):
+    def remove_profissional(self, profissional_id):
         pass
 
     @abstractmethod
-    def busca_profissional(self, id):
+    def busca_profissional_id(self, profissional_id: str) -> Profissional:
+        pass
+
+    @abstractmethod
+    def busca_profissional_email(self, email: str) -> Profissional:
         pass

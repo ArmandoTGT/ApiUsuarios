@@ -12,16 +12,13 @@ if (sys.platform == "win32" or sys.platform == "win64") and windows_origin_path 
     sys.path.append(windows_origin_path)
 
 from business.control.AdicionaProfissional import AdicionaProfissional
-from business.control.AdicionaOrcamento import AdicionaOrcamento
-
-#Funções chamadas em Login
 from business.control.Validation.LoginValidation import LoginValidation
 from business.control.Validation.PasswordValidation import PasswordValidation
+from business.control.Exceptions.NotFoundException import NotFoundException
 from business.model.Profissional import Profissional
 from business.model.Orcamento import Orcamento
-from infra import dao
-#classe que gera Relatório
-from business.relatorio import relatorio
+
+from infra.DAOFactory import DAOFactory
 
 
 class FacadeCadastro:
@@ -35,19 +32,6 @@ class FacadeCadastro:
 
         try:
             AdicionaProfissional(nome, senha, email, data_nascimento, cpf, rg, cnh, telefone, endereco)
-        except Exception as E:
-            print(E)
-
-    @staticmethod
-    def add_orcamento(nome: str, profissional: Profissional, orcamento: Orcamento, id_servico: str) -> None:
-        global frequencia_de_acesso
-
-        frequencia_de_acesso += 1
-
-        FacadeCadastro.__relatorio_acesso()
-
-        try:
-            AdicionaOrcamento(nome, profissional, orcamento, id_servico)
         except Exception as E:
             print(E)
 
@@ -82,22 +66,24 @@ class FacadeCadastro:
         return senha
 
     @staticmethod
-    def valida_cliente(email, senha):
-        global frequenciaDeAcesso
-        frequenciaDeAcesso += 1
-        # print('Frequencia de Acesso:', frequenciaDeAcesso)
-        facade.relatorio_acesso()
+    def valida_profissional(email: str) -> bool:
+        global frequencia_de_acesso
+        frequencia_de_acesso += 1
 
-        banco = 'shelve'
-        gerenciador = dao.getBanco(banco)
+        FacadeCadastro.__relatorio_acesso()
 
-        cliente_valido = False
+        dao_profissional = DAOFactory.getDAOFactory("RAM").getProfissionalDAO()
+
         try:
-            cliente_valido = gerenciador.validaCliente(email, senha)
-        except Exception as error:
-            print('\n', error)
-
-        return cliente_valido
+            # Checa se o profissional já existe:
+            dao_profissional.busca_profissional_email(email)
+            # Se ele for encontrato, significa que há existe um usuário
+            # com o mesmo email que esse novo que está tentando se cadastrar
+            return False
+        # Se ele lançar exceção, significa que o usuário ainda não
+        # está registrado, ou seja, ele poderá ser registrado
+        except NotFoundException:
+            return True
 
     @staticmethod
     def save_logged_clients(email):

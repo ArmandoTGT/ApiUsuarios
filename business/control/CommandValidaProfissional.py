@@ -11,6 +11,7 @@ if (sys.platform == "win32" or sys.platform == "win64") and windows_origin_path 
 
 from business.control.Command import Command
 from business.control.FacadeCadastro import FacadeCadastro
+from business.control.Exceptions.AlreadyInUseException import AlreadyInUseException
 
 
 class CommandValidaProfissional(Command):
@@ -20,4 +21,7 @@ class CommandValidaProfissional(Command):
         self._email = email
 
     def execute(self) -> None:
-        self._facade.valida_profissional(self._email, self._senha)
+        is_valid = self._facade.valida_profissional(self._email)
+
+        if not is_valid:
+            raise AlreadyInUseException("email")

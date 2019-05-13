@@ -17,8 +17,8 @@ from infra.XmlDAOFactory import XmlDAOFactory
 class DAOFactory(ABC):
     # Lista de tipos DAO os quais a fábrica
     # oferece suporte:
-    RAM = 1
-    XML = 2
+    RAM = "RAM"
+    XML = "XML"
 
     # Cada fábrica de todos os tipos erá de oferecer um retorno
     # para cada DAO possível de ser criado:
