@@ -15,7 +15,6 @@ from business.control.Exceptions.WrongLoginException import WrongLoginException
 from business.control.Exceptions.EmailAlreadyInUseException import EmailAlreadyInUseException
 import shelve
 
-from business.model.User import User
 
 class DBControl:
     def __init__(self):

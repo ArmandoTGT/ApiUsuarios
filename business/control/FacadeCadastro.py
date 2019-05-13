@@ -86,18 +86,6 @@ class FacadeCadastro:
             return True
 
     @staticmethod
-    def save_logged_clients(email):
-        global frequenciaDeAcesso
-        frequenciaDeAcesso += 1
-        # print('Frequencia de Acesso:', frequenciaDeAcesso)
-        facade.relatorio_acesso()
-
-        try:
-            saveLoggedClients(email)
-        except Exception as error:
-            print('\n', error)
-
-    @staticmethod
     def __relatorio_acesso():
         global horaPassada, tempoPassado
 
@@ -105,37 +93,27 @@ class FacadeCadastro:
 
         tempoPassado = (horaAtual - horaPassada).seconds
 
-        tempo = 10
+        tempo = 600
 
         if tempoPassado > tempo:
             horaPassada = horaAtual
-            threading.Timer(1, facade.gera_relatorio, args=[tempoPassado]).start()
+            threading.Timer(1, FacadeCadastro.gera_relatorio, args=[tempoPassado]).start()
 
     @staticmethod
     def gera_relatorio(tempoPassado):
+        global frequencia_de_acesso_anterior
 
-        global frequenciaDeAcessoAnterior  # , tempoPassado
+        frequencia_atual = (frequencia_de_acesso - frequencia_de_acesso_anterior)
 
-        # print('Gerando Relatório!')
-        # print('Frequencia de Acesso:', frequenciaDeAcesso)
-        # print('Frequencia de Acesso Anterior:', frequenciaDeAcessoAnterior)
+        frequencia_de_acesso_anterior = frequencia_de_acesso
 
-        frequenciaAtual = (frequenciaDeAcesso - frequenciaDeAcessoAnterior)
-
-        frequenciaDeAcessoAnterior = frequenciaDeAcesso
-
-        # print('Frequencia Atual:', frequenciaAtual)
-        # print('Tempo Passado:', tempoPassado)
-
-        if frequenciaAtual == 0:
+        if frequencia_atual == 0:
             quantidadeAcessoSegundos = (tempoPassado / 1)
         else:
-            quantidadeAcessoSegundos = (tempoPassado / frequenciaAtual)
-
-        # print('Quantidade Acesso Segundos:', quantidadeAcessoSegundos)
+            quantidadeAcessoSegundos = (tempoPassado / frequencia_atual)
 
         minutosPassados = (tempoPassado / 60)
 
-        dados = [frequenciaAtual, minutosPassados, quantidadeAcessoSegundos]
+        dados = [frequencia_atual, minutosPassados, quantidadeAcessoSegundos]
 
         relatorio('json').getRelatorio(dados)

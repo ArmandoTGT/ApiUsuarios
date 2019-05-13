@@ -1,20 +1,16 @@
 import sys
-from sys import platform as _platform
 
-if _platform == "linux" or _platform == "linux2":
-	origin_path = "/.."
-elif _platform == "win32" or "win64":
-	origin_path = ".."
-else:
-    origin_path = ".."
+linux_origin_path = "/.."
+windows_origin_path = ".."
 
-if origin_path not in sys.path:
-    sys.path.append(origin_path)
+if (sys.platform == "linux" or sys.platform == "linux2") and linux_origin_path not in sys.path:
+    sys.path.append(linux_origin_path)
+
+if (sys.platform == "win32" or sys.platform == "win64") and windows_origin_path not in sys.path:
+    sys.path.append(windows_origin_path)
 
 from business.control.Validation.LoginValidation import LoginValidation
 from business.control.Validation.PasswordValidation import PasswordValidation
-from infra.infra import DBControl
-from business.model.Profissional import Profissional
 from infra.RamProfissionalDAO import RamProfissionalDAO
 
 
@@ -25,11 +21,11 @@ def AtualizaProfissional(id, nome, senha, email, telefone, endereco):
     
     DAO = RamProfissionalDAO()
 
-    profissional = DAO.busca_profissional(id)
-    profissional.nome = nome
-    profissional.email = email
-    profissional.telefone = telefone
-    profissional.endereco = endereco
+    profissional = DAO.busca_profissional_id(id)
+    profissional.set_nome(nome)
+    profissional.set_email(email)
+    profissional.set_telefone(telefone)
+    profissional.set_endereco(endereco)
     
     DAO.atualiza_profissional(profissional)
         

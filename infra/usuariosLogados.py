@@ -4,8 +4,6 @@ import pickle
 import collections
 from datetime import datetime
 
-from business.model.User import User
-from infra import DBControl
 
 def loadLoggedUsers():
     try:

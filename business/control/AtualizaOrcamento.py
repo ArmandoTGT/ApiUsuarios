@@ -1,16 +1,14 @@
 import sys
-from sys import platform as _platform
 
-if _platform == "linux" or _platform == "linux2":
-	origin_path = "/.."
-elif _platform == "win32" or "win64":
-	origin_path = ".."
+linux_origin_path = "/.."
+windows_origin_path = ".."
 
-if origin_path not in sys.path:
-    sys.path.append(origin_path)
+if (sys.platform == "linux" or sys.platform == "linux2") and linux_origin_path not in sys.path:
+    sys.path.append(linux_origin_path)
 
-from infra.infra import DBControl
-from business.model.Orcamento import Orcamento
+if (sys.platform == "win32" or sys.platform == "win64") and windows_origin_path not in sys.path:
+    sys.path.append(windows_origin_path)
+
 from infra.RamOrcamentoDAO import RamOrcamentoDAO
 
 
@@ -18,8 +16,8 @@ def AtualizaOrcamento(nome, orcamento):
     DAO = RamOrcamentoDAO()
 
     Orcamento = DAO.busca_orcamento(id)
-    Orcamento.nome = nome
-    Orcamento.orcamento = orcamento
+    Orcamento.set_nome(nome)
+    Orcamento.set_orcamento(orcamento)
     
     DAO.atualiza_orcamento(orcamento)
         

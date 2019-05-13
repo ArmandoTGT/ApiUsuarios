@@ -14,8 +14,9 @@ from business.control.Fonte import Fonte
 
 
 class Profissional:
-    def __init__(self, id, nome, senha, email, data_nascimento, cpf, rg, cnh, telefone, endereco):
-        self.__id = id
+    def __init__(self, identification, nome, senha, email, data_nascimento,
+                 cpf, rg, cnh, telefone, endereco, flag_fonte=True):
+        self.__id = identification
         self.__nome = nome
         self.__senha = senha
         self.__email = email
@@ -25,8 +26,11 @@ class Profissional:
         self.__cnh = cnh
         self.__telefone = telefone
         self.__endereco = endereco
-        self.__fonte = Fonte(Profissional(id, nome, senha, email, data_nascimento, cpf, rg, cnh, telefone, endereco))
-        self.__zelador = Zelador(self.__fonte)
+
+        if flag_fonte:
+            self.__fonte = Fonte(Profissional(id, nome, senha, email, data_nascimento, cpf, rg,
+                                              cnh, telefone, endereco, flag_fonte=False))
+            self.__zelador = Zelador(self.__fonte)
 
     # Override do equals para fazer com que a comparação ==
     # entre dois objetos do tipo Profissional retorne True

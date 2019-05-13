@@ -17,7 +17,6 @@ import shelve
 import xml.etree.ElementTree
 from django.core import serializers
 
-from business.model.User import User
 
 class DBControl:
     def __init__(self):
