@@ -15,15 +15,15 @@ from business.control.AdicionaProfissional import AdicionaProfissional
 from business.control.Validation.LoginValidation import LoginValidation
 from business.control.Validation.PasswordValidation import PasswordValidation
 from business.control.Exceptions.NotFoundException import NotFoundException
+from business.control.relatorio import relatorio
 from business.model.Profissional import Profissional
-from business.model.Orcamento import Orcamento
 
 from infra.DAOFactory import DAOFactory
 
 
 class FacadeCadastro:
     @staticmethod
-    def add_profissional(nome, senha, email, data_nascimento, cpf, rg, cnh, telefone, endereco) -> None:
+    def add_profissional(profissional: Profissional) -> None:
         global frequencia_de_acesso
 
         frequencia_de_acesso += 1
@@ -31,7 +31,7 @@ class FacadeCadastro:
         FacadeCadastro.__relatorio_acesso()
 
         try:
-            AdicionaProfissional(nome, senha, email, data_nascimento, cpf, rg, cnh, telefone, endereco)
+            AdicionaProfissional(profissional)
         except Exception as E:
             print(E)
 

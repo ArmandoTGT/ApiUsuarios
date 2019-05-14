@@ -12,6 +12,7 @@ if (sys.platform == "win32" or sys.platform == "win64") and windows_origin_path 
 
 from infra.RamDAOFactory import RamDAOFactory
 from infra.XmlDAOFactory import XmlDAOFactory
+from infra.Singleton import Singleton
 
 
 class DAOFactory(ABC):
@@ -30,13 +31,13 @@ class DAOFactory(ABC):
     def getServicoDAO(self):
         pass
 
-    def getDAOFactory(self, factory_type):
-        if factory_type == self.RAM:
+    def getDAOFactory(self, factory_type: str):
+
+        factory_type = Singleton(factory_type)
+
+        if factory_type.nome == self.RAM:
             return RamDAOFactory
-        elif factory_type == self.XML:
+        elif factory_type.nome == self.XML:
             return XmlDAOFactory
         else:
             return None
-
-
-

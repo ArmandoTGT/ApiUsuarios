@@ -14,9 +14,9 @@ from business.control.Fonte import Fonte
 
 
 class Profissional:
-    def __init__(self, identification, nome, senha, email, data_nascimento,
+    def __init__(self, nome, senha, email, data_nascimento,
                  cpf, rg, cnh, telefone, endereco, flag_fonte=True):
-        self.__id = identification
+        self.__id = None
         self.__nome = nome
         self.__senha = senha
         self.__email = email
@@ -46,7 +46,7 @@ class Profissional:
 
     def get_id(self):
         return self.__id
-   
+
     def get_nome(self):
         return self.__nome
 
@@ -64,19 +64,22 @@ class Profissional:
 
     def get_rg(self):
         return self.__rg
-    
+
     def get_cnh(self):
         return self.__cnh
 
     def get_telefone(self):
         return self.__telefone
-    
+
     def get_endereco(self):
         return self.__endereco
-    
+
+    def set_id(self, new_id):
+        self.__id = new_id
+
     def set_nome(self, nome):
         self.__zelador.save_state(Profissional(self.__id, self.__nome, self.__senha, self.__email, self.__data_nascimento,
-                                               self.__cpf, self.__rg, self.__cnh, self.__telefone, self.__endereco))
+                                           self.__cpf, self.__rg, self.__cnh, self.__telefone, self.__endereco))
         self.__nome = nome
 
     def set_senha(self, senha):

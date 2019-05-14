@@ -10,14 +10,16 @@ if (sys.platform == "win32" or sys.platform == "win64") and windows_origin_path 
     sys.path.append(windows_origin_path)
 
 from business.control.Command import Command
-from business.control.FacadeCadastro import FacadeCadastro
+from business.control.AdicionaOrcamento import AdicionaOrcamento
 from business.model.Orcamento import Orcamento
 
 
 class CommandAddOrcamento(Command):
-    def __init__(self, facade: FacadeCadastro, orcamento: Orcamento) -> None:
-        self._facade = facade
-        self._orcamento = orcamento
+    def __init__(self, orcamento: Orcamento) -> None:
+        self.__orcamento = orcamento
 
     def execute(self) -> None:
-        self._facade.add_orcamento(self._orcamento)
+        try:
+            AdicionaOrcamento(self.__orcamento)
+        except Exception as E:
+            print(E)

@@ -1,7 +1,7 @@
 class Orcamento:
     # CONSTRUTOR:
-    def __init__(self, id, nome: str, profissional, orcamento, idServico):
-        self.__id = id
+    def __init__(self, nome: str, profissional, orcamento, idServico):
+        self.__id = None
         self.__nome = nome
         self.__profissional = profissional
         self.__orcamento = orcamento
@@ -31,9 +31,11 @@ class Orcamento:
         return self.__id
 
     # MÈTODOS SET:
+    def set_id(self, new_id):
+        self.__id = new_id
+
     def set_nome(self, nome):
         self.__nome = nome
 
     def set_orcamento(self, orcamento):
         self.__orcamento = orcamento
- 

@@ -13,18 +13,17 @@ if (sys.platform == "win32" or sys.platform == "win64") and windows_origin_path 
 from business.control.Validation.LoginValidation import LoginValidation
 from business.control.Validation.PasswordValidation import PasswordValidation
 from business.model.ModelFactory import ModelFactory
-from infra.RamProfissionalDAO import RamProfissionalDAO
+from business.model.Profissional import Profissional
+from infra.DAOFactory import DAOFactory
 
 
-def AdicionaProfissional(nome, senha, email, data_nascimento, cpf, rg, cnh, telefone, endereco):
-    email = LoginValidation().validate(email)
-    senha = PasswordValidation().validate(senha)
-
-    DAO = RamProfissionalDAO()
+def AdicionaProfissional(profissional: Profissional):
+    dao = DAOFactory.getDAOFactory("RAM").getProfissionalDAO()
 
     generated_id = str(uuid.uuid4()).split('-')
-    final_id = str(cpf) + generated_id[0] + generated_id[1]
+    final_id = str(profissional.get_cpf()) + generated_id[0] + generated_id[1]
 
-    profissional = ModelFactory.createObject("profissional", final_id, nome, senha, email,
-                                             data_nascimento, cpf, rg, cnh, telefone, endereco)
-    DAO.insere_profissional(profissional)
+    profissional.set_id(final_id)
+
+    #profissional = ModelFactory.createObject("profissional", final_id, nome, senha, email, data_nascimento, cpf, rg, cnh, telefone, endereco)
+    dao.insere_profissional(profissional)

@@ -16,8 +16,8 @@ from business.model.Profissional import Profissional
 
 class CommandAddProfissional(Command):
     def __init__(self, facade: FacadeCadastro, profissional: Profissional) -> None:
-        self._facade = facade
-        self._profissional = profissional
+        self.__facade = facade
+        self.__profissional = profissional
 
     def execute(self) -> None:
-        self._facade.add_profissional(self._profissional)
+        self.__facade.add_profissional(self.__profissional)
